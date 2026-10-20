@@ -29,12 +29,46 @@ myLibrary.push(book1);
 myLibrary.push(book2);
 
 function addBookToLibrary() {
+    //Obatin inputted information
+    var titleField = document.getElementById("titleInput");
+    var authorField = document.getElementById("authorInput");
+    var pagesField = document.getElementById("pagesInput");
+    var bookReadField = document.getElementById("bookRead");
 
+    var title = titleField.value;
+    var author = authorField.value;
+    var pages = pagesField.value;
+    var bookRead = bookReadField.checked; 
+
+    //Create book object
+    var newBook = new Book(title, author, pages, bookRead);
+
+    //Add new book object to library array
+    myLibrary.push(newBook);
+
+    //Reset input fields on front end
+    titleField.value = '';
+    authorField.value = '';
+    pagesField.value = '';
+    bookReadField.checked = false;
+
+    //Display the book information on screen
+    printBook(newBook);
 }
 
-myLibrary.forEach(function(item){
+//Function to print all lists in the library in an unstructured list
+function printBook(bookParam){
+    //Create list element
     var li = document.createElement("li");
-    var text = document.createTextNode(item.info());
+    //Create text element containing book information
+    var text = document.createTextNode(bookParam.info());
+    //Add book text to the list element as a child
     li.appendChild(text);
+    //Add list element to the book list as a child
     document.getElementById("bookList").appendChild(li);
-});
+}
+
+//Print information for all books already stored in the library array
+myLibrary.forEach(function(item){
+        printBook(item);
+    });
