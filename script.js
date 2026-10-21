@@ -21,15 +21,24 @@ function Book(title, author, pages, read){
     }
 }
 
+//Add 2 books to the library initially
 const book1 = new Book("The Hobbit", "J.R.R. Tolkien", 295, false);
-
 const book2 = new Book("Project Hail Mary", "Andy Weir", 496, true);
 
 myLibrary.push(book1);
 myLibrary.push(book2);
 
+//Hide "new book" form
+function hideForm(){
+    document.getElementById("titleInput").style.visibility = "hidden";
+    document.getElementById("authorInput").style.visibility = "hidden";
+    document.getElementById("pagesInput").style.visibility = "hidden";
+    document.getElementById("bookRead").style.visibility = "hidden";
+    document.getElementById("bookReadLabel").style.visibility = "hidden";
+}
+
 function addBookToLibrary() {
-    //Obatin inputted information
+    //Obtain inputted information
     var titleField = document.getElementById("titleInput");
     var authorField = document.getElementById("authorInput");
     var pagesField = document.getElementById("pagesInput");
@@ -54,6 +63,9 @@ function addBookToLibrary() {
 
     //Display the book information on screen
     printBook(newBook);
+
+    //Hide new book form when data has been saved
+    hideForm();
 }
 
 //Function to print all lists in the library in an unstructured list
@@ -67,6 +79,17 @@ function printBook(bookParam){
     //Add list element to the book list as a child
     document.getElementById("bookList").appendChild(li);
 }
+
+function makeFormVisible(){
+    document.getElementById("titleInput").style.visibility = "visible";
+    document.getElementById("authorInput").style.visibility = "visible";
+    document.getElementById("pagesInput").style.visibility = "visible";
+    document.getElementById("bookRead").style.visibility = "visible";
+    document.getElementById("bookReadLabel").style.visibility = "visible";
+}
+
+//Hide new book form initially when the page loads
+hideForm();
 
 //Print information for all books already stored in the library array
 myLibrary.forEach(function(item){

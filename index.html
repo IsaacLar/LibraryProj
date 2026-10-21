@@ -13,12 +13,16 @@
 
         <p>Please feel free to add more books to our library by using the form below:</p>
 
-        <script src="script.js"></script>
+        
+        <button onclick="makeFormVisible()">New Book</button><br>
+
         <input type="text" id="titleInput" placeholder="Title"><br>
         <input type="text" id="authorInput" placeholder="Author"><br>
         <input type="number" id="pagesInput" placeholder="Number of pages" min="1"><br>
-        <input type="checkbox" id="bookRead"> <label for="bookRead">Book read?</label><br>
+        <input type="checkbox" id="bookRead"> <label id="bookReadLabel" for="bookRead">Book read?</label><br>
 
-        <button onclick="addBookToLibrary()">Test</button>
+        <button onclick="addBookToLibrary()">Add Book</button>
+
+        <script src="script.js"></script>
     </body>
 </html>
