@@ -1,4 +1,4 @@
-const myLibrary = [];
+var myLibrary = [];
 
 function Book(title, author, pages, read){
     if (!new.target){
@@ -72,12 +72,35 @@ function addBookToLibrary() {
 function printBook(bookParam){
     //Create list element
     var li = document.createElement("li");
+    //Set the id of this specific list element to the book ID
+    li.id = bookParam.id;
     //Create text element containing book information
     var text = document.createTextNode(bookParam.info());
+    
     //Add book text to the list element as a child
     li.appendChild(text);
+
+    //Add delete button next to each book
+    var deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete book";
+    deleteButton.id = bookParam.id;
+    deleteButton.onclick = function() { return deleteBook(deleteButton.id) };
+    li.appendChild(deleteButton);
     //Add list element to the book list as a child
     document.getElementById("bookList").appendChild(li);
+}
+
+function findBook(bookID){
+    return myLibrary.find(function(item){
+        return item.id == bookID;
+    })
+}
+
+function deleteBook(bookID){
+    var bookToDelete = findBook(bookID);
+    myLibrary = myLibrary.filter(item => item != bookToDelete);
+
+    document.getElementById(bookID).remove();
 }
 
 function makeFormVisible(){
