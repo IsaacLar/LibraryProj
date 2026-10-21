@@ -81,13 +81,39 @@ function printBook(bookParam){
     li.appendChild(text);
 
     //Add delete button next to each book
-    var deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete book";
-    deleteButton.id = bookParam.id;
-    deleteButton.onclick = function() { return deleteBook(deleteButton.id) };
-    li.appendChild(deleteButton);
+    addDeleteButton(li, bookParam.id);
+
+    //Add button to change the read status of the book
+    addReadStatusButton(li, bookParam.id);
+
     //Add list element to the book list as a child
     document.getElementById("bookList").appendChild(li);
+}
+
+function addDeleteButton(liElement, bookID){
+    var deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete Book";
+    deleteButton.id = bookID;
+    deleteButton.onclick = function() { return deleteBook(deleteButton.id)};
+    liElement.appendChild(deleteButton);
+}
+
+function addReadStatusButton(liElement, bookID){
+    var readStatusButton = document.createElement("button");
+    readStatusButton.textContent = "Change read status";
+    readStatusButton.id = bookID;
+    readStatusButton.onclick = function() { return changeReadStatus(readStatusButton.id)};
+    liElement.appendChild(readStatusButton);
+}
+
+function changeReadStatus(bookID){
+    var bookToChange = findBook(bookID);
+    bookToChange.read = !bookToChange.read;
+    
+    var listElement = document.getElementById(bookID);
+    listElement.textContent = bookToChange.info();
+    addDeleteButton(listElement, bookID);
+    addReadStatusButton(listElement, bookID);
 }
 
 function findBook(bookID){
